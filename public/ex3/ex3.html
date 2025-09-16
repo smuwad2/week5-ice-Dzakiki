@@ -37,20 +37,56 @@
             // Fetch categories from the server using Axios
             // and display them in the select element
             // url: http://localhost:3010/categories
+            
+            //let url = 'http://localhost:3000/categories'
+            let url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/categories"
+            axios.get(url)
+                .then(response => {
+                    showCategories(response.data);
+                })
+                .catch(error => {
+                    alert("Error loading categories");
+                });
 
         }
 
         function showCategories(categories) {
             // Display the categories in the select element
-            
+            const dropdown = document.getElementById('selectCategory')
+            for (cat of categories) {
+                        const category = document.createElement('option');
+                        category.innerText = cat;
+                        category.value = cat;
+                        dropdown.appendChild(category);
+                    }
         }
 
-        function getItems() {
+        async function getItems() {
             // Fetch items based on the selected category
             // If "To select" is chosen, do nothing
             // If "All" is chosen, fetch all items
             // If a specific category is chosen, fetch items for that category
             // url: http://localhost:3010/items?category=categoryName
+            const categoryName = document.getElementById('selectCategory').value
+            // console.log(categoryName)
+
+            let url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/items"
+            try {
+                if (categoryName === 'all') {
+                    const response = await axios.get(url)
+                    const data = response.data
+
+                    showItems(data)
+                }else {
+                    const response = await axios.get(url, {params: {category: categoryName}})
+                    const data = response.data
+
+                    showItems(data)
+                }
+            }
+            catch(err) {
+                console.error(err)
+            }
             
         }
 
@@ -58,8 +94,37 @@
             // Display the items in the itemsList div
             // Each item should be displayed in a bootstrap card format
             // The display should be responsive 3 columns on large screens, 2 columns on medium screens, and 1 column on small screens
-            
+            const display = document.getElementById('itemsList')
+            display.replaceChildren();
+            items.forEach(element => {
+                console.log(element);
 
+                const col = document.createElement('div');
+                col.className = "col-lg-4 col-md-6 d-flex justify-content-center mb-3";
+
+                const card = document.createElement('div');
+                card.className = "card ";
+
+                card.style.width = '15rem';
+
+                const cardbody = document.createElement('div');
+                cardbody.className = 'card-body'
+
+                const itemName = document.createElement('h5');
+                itemName.textContent = element.name;
+                itemName.className = "text-center"
+                
+                const price = document.createElement('p');
+                price.textContent = 'Price: $' + element.price;
+                price.className = "text-center"
+
+                cardbody.appendChild(itemName)
+                cardbody.appendChild(price)
+                card.appendChild(cardbody)
+                col.appendChild(card)
+                display.appendChild(col)
+            });
+            
         }
 
     </script>
