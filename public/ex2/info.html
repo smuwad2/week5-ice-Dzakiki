@@ -27,7 +27,9 @@
                 const typeChosen = document.getElementById('type').value;
                 const limitChosen = document.getElementById('limit').value;
                 
-                let url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/data"
+
+                let url = 'http://localhost:3000/data'
+                let urltest = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/data"
                 try {
                         const response = await axios.get(url, {params: {type: typeChosen, limit: limitChosen}})
                         const data = response.data

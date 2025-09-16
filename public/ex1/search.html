@@ -29,7 +29,8 @@
 
             function showHint() {
                 var str = event.target.value;
-                const url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/suggest"
+                const url = "http://localhost:3000/suggest";
+                const urltest = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/suggest"
                 axios.get(url, { params: { query: str } })
 
                 .then(response => {

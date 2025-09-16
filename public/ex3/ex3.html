@@ -38,8 +38,8 @@
             // and display them in the select element
             // url: http://localhost:3010/categories
             
-            //let url = 'http://localhost:3000/categories'
-            let url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/categories"
+            let url = 'http://localhost:3000/categories'
+            let urltest = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/categories"
             axios.get(url)
                 .then(response => {
                     showCategories(response.data);
@@ -70,7 +70,8 @@
             const categoryName = document.getElementById('selectCategory').value
             // console.log(categoryName)
 
-            let url = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/items"
+            let url = 'http://localhost:3000/items'
+            let urltest = "https://turbo-space-goldfish-9gp77xxpwv42xqpw-3000.app.github.dev/items"
             try {
                 if (categoryName === 'all') {
                     const response = await axios.get(url)
