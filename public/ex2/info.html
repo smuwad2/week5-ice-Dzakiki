@@ -50,7 +50,7 @@
                 label.textContent = type;
                 label.classList.add('pl-2');
 
-                let item = dataObj.records[0];
+                let item = dataObj.records[0]; // just getting the first object in the array because we only need the keys
                 const headerRow = document.createElement('tr');
                 Object.keys(item).forEach(key => {
                     const th = document.createElement('th'); //for the content of the header
